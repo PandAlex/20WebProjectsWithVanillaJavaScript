@@ -43,7 +43,7 @@ function updatePlayIcon() {
 /**
  * Updates both the progressBar and the timestamp elements
  */
-function updateProgress(e) {
+function updateProgress() {
     if(!shouldUpdateVideo) {
         return;
     }
