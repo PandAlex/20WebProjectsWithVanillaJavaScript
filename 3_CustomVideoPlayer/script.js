@@ -43,7 +43,7 @@ function updatePlayIcon() {
 /**
  * Updates both the progressBar and the timestamp elements
  */
-function updateProgress() {
+function updateProgress(e) {
     if(!shouldUpdateVideo) {
         return;
     }
@@ -82,6 +82,7 @@ btnStop.addEventListener('click', stopVideo);
 
 // Event Listeners for the progress bar
 progresssBar.addEventListener('change', setVideoProgress);
-progresssBar.addEventListener('input', _ => {
+progresssBar.addEventListener('input', e => {
     shouldUpdateVideo = false;
+    timestamp.innerText = secondsToTimestamp(video.duration * (e.target.value / 100)) + '/' + secondsToTimestamp(video.duration);;
 })
