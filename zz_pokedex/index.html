@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+    <div class="container" id="container">
+
+    </div>
+</head>
+<body>
+    <script src="pokedex.js" type="module"></script>
+    <script type="module">
+        import pokedex from "./pokedex.js";
+        import learnsets from './learnsets.js';
+        console.log(learnsets['bulbasaur']);
+        // const test = Object.keys(pokedex).map(pokemon => {
+        //     console.log(learn);
+        //     return `<div>${pokedex[pokemon].name}</div>`;
+        // }).join('');
+        // document.getElementById('container').innerHTML = test;
+    </script>
+</body>
+</html>

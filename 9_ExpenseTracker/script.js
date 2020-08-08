@@ -56,6 +56,7 @@ function addTransactionDOM(transaction) {
     const sign = transaction.amount > 0 ? '+' : '-';
 
     const item = document.createElement('li');
+    item.setAttribute('data-transactionID', transaction.id);
     //Add class based on value
     item.classList.add(transaction.amount > 0 ? 'plus' : 'minus');
     item.innerHTML = `
@@ -98,9 +99,10 @@ function editTransaction(e) {
     for(let i = 0; i < e.path.length; i++) {
         const el = e.path[i];
         if(el.nodeName === 'LI') {
-            el.classList.add('editable');
             const span = el.querySelector('span');
             const input = document.createElement('input');
+            el.classList.add('editable');
+            
             input.value = +span.innerText;
             span.parentNode.replaceChild(input, span);
 
@@ -110,7 +112,6 @@ function editTransaction(e) {
             saveBtn.classList.add('save-btn');
             saveBtn.addEventListener('click', saveChanges);
             editBtn.parentNode.replaceChild(saveBtn, editBtn);
-
             break;
         }
     }
@@ -120,11 +121,18 @@ function saveChanges(e) {
     for(let i = 0; i < e.path.length; i++) {
         const el = e.path[i];
         if(el.nodeName === 'LI') {
-            // Wert anpassen
-
-            el.classList.remove('editable');
+            const transactionID = parseInt(el.getAttribute('data-transactionID'));
             const input = el.querySelector('input');
             const span = document.createElement('span');
+
+            for(let j = 0; j < transactions.length; j++) {
+                if(transactionID === transactions[j].id) {
+                    transactions[j].amount = +input.value;
+                }
+            }
+
+            el.classList.remove('editable');
+
             span.innerText = +input.value;
             input.parentNode.replaceChild(span, input);
 
@@ -137,6 +145,8 @@ function saveChanges(e) {
             break;
         }
     }
+    updateLocalStorage();
+    init();
 }
 
 /**

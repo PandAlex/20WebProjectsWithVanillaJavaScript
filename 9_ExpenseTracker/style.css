@@ -170,3 +170,7 @@ input[type='text'], input[type='number'] {
 .list li.editable .delete-btn, .list li.editable .edit-btn {
     opacity: 1;
 }
+
+.list li.editable input {
+    text-align: right;
+}
